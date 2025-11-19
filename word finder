@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <sstream>
+using namespace std;
+
+class mini{
+    public:
+     void chiki(){  
+     string path;
+     cout<<"Enter your filepath: ";
+     cin>>path;
+     ifstream file(path);
+     string lower;
+     string cword;
+     cout<<"Enter your word: ";
+     cin>> cword;
+     transform(cword.begin(), cword.end(), cword.begin(), ::tolower);
+     int counter = 0; 
+     int linenumber = 0;
+     while(getline(file, lower)){
+        linenumber++;
+        string word= lower;
+        transform(word.begin(), word.end(), word.begin(), ::tolower);
+        stringstream ss(word);
+        string nan;
+        while(ss >> nan){
+        if(nan == cword){
+            cout<<"found at line: "<<linenumber<<endl;
+            counter++;
+        }    
+    }
+}
+    cout<<"total number of word '"<<cword<<"' is: "<<counter<<endl;
+    
+    file.close();
+}
+};
+
+int main(){
+    
+    mini obj;
+    obj.chiki();
+    return 0;
+}
